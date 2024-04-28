@@ -1,0 +1,3 @@
+[console_scripts]
+pytouch=python_touch.cli:main
+

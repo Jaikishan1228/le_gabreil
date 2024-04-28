@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: python-touch
+Version: 0.1.2
+Summary: 
+License: MIT
+Author: takeshi0406
+Author-email: sci.and.eng@gmail.com
+Requires-Python: >=3.7,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Dist: click (>=7.1.2,<8.0.0)
+Description-Content-Type: text/markdown
+
+# python-touch
+
+This is a CLI tool for people who are tired of creating `__init__.py` files in their Python projects.
+
+# Instration
+
+```bash
+$ pip install python-touch
+$ # if you're a pipx user.
+$ pipx install python-touch
+```
+
+# Usage
+
+The following command creates `__init__.py` recursively.
+
+```bash
+$ pytouch {directory name}
+```
