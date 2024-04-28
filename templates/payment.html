@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>My Payment Page</title>
+    <link rel="stylesheet" href={% static "styles/payment.css" %}>
+    </head>
+    <body>
+        <div class="payment-page">
+        <!-- Payment form code here -->
+            <div class="payment-page">
+                <h1>Payment Form</h1>
+                <form action={% url 'payment' %} method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" name="card-number">
+                    </div>
+                    <div class="form-group">
+                        <label for="card-name">Name on Card</label>
+                        <input type="text" id="card-name" name="card-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="expiration-date">Expiration Date</label>
+                        <fieldset class="expiration-date">
+                        <input type="text" id="expiration-month" name="expiration-month">
+                        <input type="text" id="expiration-year" name="expiration-year">
+                        </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <label for="security-code">Security Code</label>
+                        <input type="text" id="security-code" name="security-code">
+                    </div>
+                    <button type="submit">Complete Payment</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- <script type="text/javascript" src={% static "js/payment.js" %}></script> -->
+
+    </body>
+</html>

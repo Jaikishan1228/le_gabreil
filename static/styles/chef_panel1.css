@@ -1,0 +1,57 @@
+body{ 
+  padding: 10px 10px 20px 10px;
+  font-size: larger;
+
+}
+html{
+    padding-bottom: 30px;
+}
+.filter{
+    padding-top: 300px;
+    text-decoration: none;
+    list-style: none;
+    
+}
+.filter li{
+    margin: 20px 0px 20px 0px;
+}
+.filter li a{
+    text-decoration: none;
+    color: black;
+}
+    
+.table{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    float: right;
+    
+}
+.quantity{
+    float: right;
+}
+.head-row{
+    background-color: lightgray;
+    border-bottom: 100px;
+    font-size: larger;
+    border-color:  2px solid black;
+}
+.body-row{
+    padding: 10px 10px 10px 10px;
+    background-color: azure;
+}
+.table,th,td{
+    border: 2px  solid gray;
+    border-collapse: collapse;
+    padding: 10px;
+}
+.btn{
+    font-size: larger;
+    margin: 20px;
+    float: inline-end;
+}
+.btn button{
+    font-size: 50px;
+    padding: 25px 50px;
+    background-color: azure;
+}

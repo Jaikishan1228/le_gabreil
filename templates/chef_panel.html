@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href={% static "styles/chef_panel1.css" %}>
+    <style>
+        
+    </style>
+</head>
+<body>
+  
+  <div>
+    <table class="table">
+        <thead>
+            <tr class="head-row" >
+                <th>order-id</th>
+                <th>items</th>
+                <th>order-time</th>
+                <th>status</th>
+                <th>duration</th>
+                <!-- <th>Update</th> -->
+            </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr class="body-row">
+            <td>{{ order.id }}</td>
+            <td>
+              {% for order_item in order.orderitem_set.all %}
+              <div class="item-name">{{ order_item.product }}<span class="quantity" style="padding-right: 20px;">{{ order_item.quantity }}</span></div>
+              {% empty %}
+              <p>No items found.</p>
+              {% endfor %}
+            </td>
+            <td>{{ order.date_ordered }}</td>
+            <form method="POST" action="{% url 'update_status' %}>
+              {% csrf_token %}
+              <td>
+                <select name="status" id="order-status">
+                  <option >Select</option>
+                  {% for choice in status_choices %}
+                  <option value="{{ choice.0 }}" {% if order.status_set.first.status == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                  {% endfor %}
+                </select>
+              </td>
+              <td>
+                <select name="duration" id="duration">
+                  <option >Select</option>
+                  {% for choice in time_choices %}
+                  <option value="{{ choice.0 }}" {% if order.status_set.first.time_needed == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                  {% endfor %}
+                </select>
+              </td>
+              
+            </form>
+          </tr>
+          
+          
+          
+          {% endfor %}
+          
+          
+              <!-- <tr class="body-row">
+                <td>order-id</td>
+                <td><div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> </td>
+                <td>order time</td>
+                <form action="backend.php">
+                <td><select name="order-status" id="order-status">
+                    <option >Select</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="preparing">Preparing</option>
+                  <option value="Completed">Completed</option>
+                </select></td>
+                <td><select name="" id="order-time">
+                    <option value="duration" selected>Select</option>
+                  <option value="5m">5m</option>
+                  <option value="10m">10m</option>
+                  <option value="15m">15m</option>
+                  <option value="20m">20m</option>
+                  <option value="30m">30m</option>
+                  <option value="40m">40m</option>
+                </select>
+                </td>
+                <td><button type="submit" >Update</button></td>
+            </form>
+            </tr>
+              <tr class="body-row">
+                <td>order-id</td>
+                <td><div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> </td>
+                <td>order time</td>
+                <form action="backend.php">
+                <td><select name="order-status" id="order-status">
+                    <option >Select</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="preparing">Preparing</option>
+                  <option value="Completed">Completed</option>
+                </select></td>
+                <td><select name="" id="order-time">
+                    <option value="duration" selected>Select</option>
+                  <option value="5m">5m</option>
+                  <option value="10m">10m</option>
+                  <option value="15m">15m</option>
+                  <option value="20m">20m</option>
+                  <option value="30m">30m</option>
+                  <option value="40m">40m</option>
+                </select>
+                </td>
+                <td><button type="submit" >Update</button></td>
+            </form>
+            </tr>
+              <tr class="body-row">
+                <td>order-id</td>
+                <td><div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> </td>
+                <td>order time</td>
+                <form action="backend.php">
+                <td><select name="order-status" id="order-status">
+                    <option >Select</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="preparing">Preparing</option>
+                  <option value="Completed">Completed</option>
+                </select></td>
+                <td><select name="" id="order-time">
+                    <option value="duration" selected>Select</option>
+                  <option value="5m">5m</option>
+                  <option value="10m">10m</option>
+                  <option value="15m">15m</option>
+                  <option value="20m">20m</option>
+                  <option value="30m">30m</option>
+                  <option value="40m">40m</option>
+                </select>
+                </td>
+                <td><button type="submit" >Update</button></td>
+            </form>
+            </tr>
+              <tr class="body-row">
+                <td>order-id</td>
+                <td><div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> </td>
+                <td>order time</td>
+                <form action="backend.php">
+                <td><select name="order-status" id="order-status">
+                    <option >Select</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="preparing">Preparing</option>
+                  <option value="Completed">Completed</option>
+                </select></td>
+                <td><select name="" id="order-time">
+                    <option value="duration" selected>Select</option>
+                  <option value="5m">5m</option>
+                  <option value="10m">10m</option>
+                  <option value="15m">15m</option>
+                  <option value="20m">20m</option>
+                  <option value="30m">30m</option>
+                  <option value="40m">40m</option>
+                </select>
+                </td>
+                <td><button type="submit" >Update</button></td>
+            </form>
+            </tr>
+              <tr class="body-row">
+                <td>order-id</td>
+                <td><div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> </td>
+                <td>order time</td>
+                <form action="backend.php">
+                <td><select name="order-status" id="order-status">
+                    <option >Select</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="preparing">Preparing</option>
+                  <option value="Completed">Completed</option>
+                </select></td>
+                <td><select name="" id="order-time">
+                    <option value="duration" selected>Select</option>
+                  <option value="5m">5m</option>
+                  <option value="10m">10m</option>
+                  <option value="15m">15m</option>
+                  <option value="20m">20m</option>
+                  <option value="30m">30m</option>
+                  <option value="40m">40m</option>
+                </select>
+                </td>
+                <td><button type="submit" >Update</button></td>
+            </form>
+            </tr>
+              <tr class="body-row">
+                <td>order-id</td>
+                <td><div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> </td>
+                <td>order time</td>
+                <form action="backend.php">
+                <td><select name="order-status" id="order-status">
+                    <option >Select</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="preparing">Preparing</option>
+                  <option value="Completed">Completed</option>
+                </select></td>
+                <td><select name="" id="order-time">
+                    <option value="duration" selected>Select</option>
+                  <option value="5m">5m</option>
+                  <option value="10m">10m</option>
+                  <option value="15m">15m</option>
+                  <option value="20m">20m</option>
+                  <option value="30m">30m</option>
+                  <option value="40m">40m</option>
+                </select>
+                </td>
+                <td><button type="submit" >Update</button></td>
+            </form>
+            </tr>
+            <tr class="body-row">
+                <td>order-id</td>
+                <td><div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> 
+                    <div class="item-name">item name <span class="quantity">quanitiy</span></div> </td>
+                <td>order time</td>
+                <form action="">
+                <td><select name="order-status" id="order-status">
+                    <option >Select</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="preparing">Preparing</option>
+                  <option value="Completed">Completed</option>
+                </select></td>
+                <td><select name="" id="order-time">
+                    <option value="duration" selected>Select</option>
+                  <option value="5m">5m</option>
+                  <option value="10m">10m</option>
+                  <option value="15m">15m</option>
+                  <option value="20m">20m</option>
+                  <option value="30m">30m</option>
+                  <option value="40m">40m</option>
+                </select>
+                </td>
+                <td><button type="submit" >Update</button></td>
+            </form>
+            </tr> -->
+
+        </tbody>
+    </table>
+  </div>
+  <div class="btn"> <button type="submit" id="Update-status">Update</button></div>
+    <!-- <ol class="filter" >
+      <li><a href="#">Current Orders</a></li>
+      <li><a href="#">Preparing</a></li>
+      <li><a href="#">Completed</a></li>
+    </ol> -->
+    <script src={% static "js/chef_panel.js" %}></script>
+    <!-- <script>
+      // Get the current order ID
+      var orderId = {{ order.id }};
+  
+      // Set the form action to point to the update_status view with the order ID as a query parameter
+      var form = document.querySelector('form');
+      form.action = "{% url 'update_status' %}?order_id=" + orderId;
+    </script> -->
+  
+    <!-- <script>
+      document.getElementById('update-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var status = document.getElementById('status').value;
+        var duration = document.getElementById('duration').value;
+        var order_id = {{order.id}};
+        var url = '/update-status/' + order_id + '/';
+        var data = {
+          'status': status,
+          'duration': duration
+        };
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          if (data.status == 'success') {
+            alert('Status updated successfully');
+          } else {
+            alert('Error updating status');
+          }
+        });
+      });
+    </script> -->
+   
+</body>
+</html>
